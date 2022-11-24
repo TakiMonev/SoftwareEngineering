@@ -12,11 +12,6 @@ const multer = require('multer');
 
 app.set('view engine', 'ejs');
 
-// const users = [];
-// const all_users = [];
-
-//const MONGO_URI = 'mongodb+srv://lsyun1234:cxMctvVx5ThVlktM@joinusmembers.dvefm.mongodb.net/JoinUs?retryWrites=true&w=majority';
-
 const server = async() => {
     try {
         const { MONGO_URI, PORT } = process.env;

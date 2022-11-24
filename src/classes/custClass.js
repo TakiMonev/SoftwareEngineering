@@ -1,5 +1,5 @@
-const { Cust } = require('../models/Customer');
 
+const { Cust } = require('../models/Customer');
 class Customer 
 {
     #cusNo
@@ -12,7 +12,7 @@ class Customer
 
     }
 
-    insert(CusNo, CusName, CusTel, CusAddr)
+    Insert(CusNo, CusName, CusTel, CusAddr)
     {
         this.#cusNo = CusNo;
         this.#cusName = CusName;
@@ -30,6 +30,35 @@ class Customer
 
         var customer = new Cust(newCus);
         customer.save();
+    }
+
+    async Delete(del)
+    {
+        const customer = await Cust.findOne({ cusNo: del });
+        
+        if (customer === null) 
+        {
+            console.log("Data not found");
+            return null;
+        }
+
+        const ret = await Cust.findOneAndDelete({ cusNo: del });
+        return ret;
+    }
+
+    async Update(before, after)
+    {
+        const customer = await Cust.findOne({ cusNo: before });
+        
+        if (customer === null) 
+        {
+            console.log("Data not found");
+            return null;
+        }
+
+        const ret = await Cust.updateOne({ cusNo: before }, { cusNo: after });
+
+        return ret;
     }
 }
 
