@@ -1,11 +1,13 @@
 const { Schema, model, Types} = require('mongoose')
 
 const ReturnSchema = new Schema({
-    serialNo: { type: String, required: true },
-    reDate: { type: String },
-    reReason: { type: String },
-    reTag: {type : Int } 
-    }, 
+        cusNo: { type: String, required: true },
+        cusId: { type: String },
+        cusPwd: { type: String },
+        cusName: { type: String },
+        cusTel: { type: String },
+        cusAddr: { type: String },
+      },
     { timestamps: true }
 );
 

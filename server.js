@@ -8,6 +8,7 @@ const http = require('http');
 const fs = require('fs'); 
 const path = require('path');
 const multer = require('multer');
+const { loginRouter } = require('./src/routes/loginRoute');
 
 app.set('view engine', 'ejs');
 
@@ -31,9 +32,8 @@ const server = async() => {
         console.log('MongDB connected!!!')
         // 미들웨어
         app.use(express.json());
-        app.use('/', mainRouter);
-        app.use('/login', mainRouter);
-        app.use('/reserved', mainRouter)
+        app.use('/', loginRouter);
+        app.use('/main', mainRouter);
 
         //app.use('/customer', custRouter);
         

@@ -8,63 +8,43 @@ const fs = require('fs');
 var path = require('path');
 
 const express = require('express');
-const mainRouter = express.Router();
+const loginRouter = express.Router();
 
 const ejs = require('ejs');
 var cors = require('cors');
-mainRouter.use(cors());
+loginRouter.use(cors());
 
-mainRouter.use(express.json())
-mainRouter.use(express.urlencoded({extended:false}));
+loginRouter.use(express.json())
+loginRouter.use(express.urlencoded({extended:false}));
 
-//mainRouter.use(express.static(__dirname));
+//loginRouter.use(express.static(__dirname));
+loginRouter.use(express.static(path.join(__dirname, '../../sw-engineering/public/index')));
 
-mainRouter.get('/main', async (req, res) => {
+loginRouter.get('/', async (req, res) => {
     try {
-        res.send(path.join(__dirname,  '../../sw-engineering/public/index'));
+        res.send(path.join(__dirname,  '../../sw-engineering/src/public/index'));
     } catch(err) {
         console.log(err);
         return res.status(500).send({ err: err.message });
     }
 });
 
-mainRouter.post('/main', async(req, res) => {
-    try {
-        console.log(req.body);
 
-        let { cusAddr, cusNo } = req.body;
 
-        if (!cusNo ||!cusAddr)
-            return res.status(400).send({ err: "All informations are required" });
-
-        // 데이터베이스에 저장
-        const customer = new Cust(req.body);
-        const cusInfo = new Customer();
-        cusInfo.Insert(cusNo, cusName, cusTel, cusAddr);
-        //await customer.save();
-        
-        return res.send({ customer });
-          
-    } catch(err) {
-        console.log(err);
-        return res.status(500).send({ err: err.message });
-    }
-});
-
-mainRouter.post('/main', async(req, res) => {
+loginRouter.post('/login', async(req, res) => {
     try {
         console.log("posting information");
         console.log(req.body);
 
-        let { cusNo, cusName, cusTel, cusAddr } = req.body;
+        let { cusNo, cusId, cusPwd, cusName, cusTel } = req.body;
 
-        if (!cusNo || !cusName || !cusTel || !cusAddr)
+        if (!cusNo || !cusId || !cusPwd || !cusName || !cusTel)
             return res.status(400).send({ err: "All informations are required" });
 
         // 데이터베이스에 저장
         const customer = new Cust(req.body);
         const cusInfo = new Customer();
-        cusInfo.Insert(cusNo, cusName, cusTel, cusAddr);
+        cusInfo.Insert(cusNo, cusId, cusPwd, cusName, cusTel);
         //await customer.save();
         
         return res.send({ customer });
@@ -75,7 +55,24 @@ mainRouter.post('/main', async(req, res) => {
     }
 });
 
-mainRouter.post('/main/delete', async(req, res) => {
+loginRouter.post('/find', async (req, res) => {
+    try {
+        let { CusNo } = req.body;
+
+        const foundCust = Cust.findOne({ cusNo: CusNo })
+
+        if (!foundCust) {
+            window.alert("Cannot find" + foundCust);
+            res.send(path.join(__dirname, '../../sw-engineering/src/pages/auth-page/LoginPage'))
+        }
+
+    } catch(err) {
+        console.log(err);
+        return res.status(500).send({ err: err.message });
+    }
+})
+
+loginRouter.post('/delete', async(req, res) => {
     try {
         const cusBody = new Cust(req.body);
         const cust = new Customer();
@@ -92,7 +89,7 @@ mainRouter.post('/main/delete', async(req, res) => {
     }
 });
 
-mainRouter.post('/main/update', async(req, res) => {
+loginRouter.post('/update', async(req, res) => {
     try {
         //const Body = new Cust({ cusNo: req.body.before });
         const newClass = new Customer();
@@ -110,5 +107,5 @@ mainRouter.post('/main/update', async(req, res) => {
 });
 
 module.exports = {
-    mainRouter
+    loginRouter
 }
