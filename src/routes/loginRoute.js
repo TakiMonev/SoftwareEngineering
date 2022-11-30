@@ -69,7 +69,8 @@ loginRouter.post('/login', async(req, res) => {
 
         else
         {
-            return res.status(200).send('Complete');
+            console.log(tmpId[0].cusNo);
+            return res.status(200).send(tmpId[0].cusNo);
         }
 
     } catch(err) {
