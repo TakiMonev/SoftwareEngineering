@@ -18,8 +18,8 @@ customerRouter.use(express.urlencoded({extended:false}));
 customerRouter.use(express.static(__dirname));
 
 customerRouter.get('/customer/:userid', async(req, res) => {
-    let { userid } = req.params;
-    const custFound = await Cust.find({});
+    let { userid } = req.params.userid;
+    const custFound = await Cust.find({ userid: userid });
     console.log("custFound : " + custFound);
 });
 
