@@ -13,6 +13,7 @@ const { loginRouter } = require('./src/routes/loginRoute');
 const { employRouter } = require('./src/routes/employRoute');
 const { partRouter } = require('./src/routes/partRoute');
 const { partListRouter } = require('./src/routes/partListRoute');
+const { customerRouter } = require('./src/routes/customerRoute');
 
 //app.set('view engine', 'ejs');
 
@@ -41,8 +42,7 @@ const server = async() => {
         app.use('/employ', employRouter);
         app.use('/items', partRouter);
         app.use('/itemList', partListRouter);
-        app.use(cookieParser());
-        //app.use('/customer', custRouter);
+        app.use('/customer', customerRouter);
        
         // 받는 곳
         app.listen(PORT, async () =>  console.log(`server listening on port ${PORT}`))

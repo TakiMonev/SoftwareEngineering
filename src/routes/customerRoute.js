@@ -17,10 +17,11 @@ customerRouter.use(express.urlencoded({extended:false}));
 
 customerRouter.use(express.static(__dirname));
 
-customerRouter.get('/customer/:userid', async(req, res) => {
-    let { userid } = req.params.userid;
-    const custFound = await Cust.find({ cusNo: userid });
+customerRouter.get('/:userid', async(req, res) => {
+    let { userid } = req.params;
+    const custFound = await Cust.find({ cusNo : userid });
     console.log("custFound : " + custFound);
+    return res.send({ custFound });
 });
 
 customerRouter.get('/', async(req, res) => {
