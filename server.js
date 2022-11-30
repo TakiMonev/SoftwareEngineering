@@ -3,18 +3,18 @@ const app = express();
 const { mainRouter } = require('./src/routes/mainRoute');
 const mongoose = require('mongoose');
 
-const ejs = require('ejs');
+//const ejs = require('ejs');
 const http = require('http');
 const fs = require('fs'); 
 const path = require('path');
 const multer = require('multer');
-var cookieParser = require('cookie-parser');
+//var cookieParser = require('cookie-parser');
 const { loginRouter } = require('./src/routes/loginRoute');
 const { employRouter } = require('./src/routes/employRoute');
 const { partRouter } = require('./src/routes/partRoute');
 const { partListRouter } = require('./src/routes/partListRoute');
 
-app.set('view engine', 'ejs');
+//app.set('view engine', 'ejs');
 
 // const users = [];
 // const all_users = [];

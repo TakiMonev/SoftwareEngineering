@@ -9,7 +9,7 @@ var path = require('path');
 const express = require('express');
 const customerRouter = express.Router();
 
-const ejs = require('ejs');
+//const ejs = require('ejs');
 var app = express();
 
 customerRouter.use(express.json())
@@ -19,8 +19,18 @@ customerRouter.use(express.static(__dirname));
 
 customerRouter.get('/customer/:userid', async(req, res) => {
     let { userid } = req.params.userid;
-    const custFound = await Cust.find({ cusId: userid });
+    const custFound = await Cust.find({ cusNo: userid });
     console.log("custFound : " + custFound);
+});
+
+customerRouter.get('/', async(req, res) => {
+    try {
+        const partFound = await Part.find({});
+        res.status(200).send(partFound);
+    } catch {
+        console.log(err);
+        return res.status(500).send({ err: err.message });
+    }
 });
 
 /*

@@ -10,7 +10,7 @@ var path = require('path');
 const express = require('express');
 const mainRouter = express.Router();
 
-const ejs = require('ejs');
+//const ejs = require('ejs');
 var cors = require('cors');
 mainRouter.use(cors());
 

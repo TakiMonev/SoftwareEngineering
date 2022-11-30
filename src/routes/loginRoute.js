@@ -69,9 +69,8 @@ loginRouter.post('/login', async(req, res) => {
 
         else
         {
-            res.cookie('cusId', req.body.cusId);
-            console.log(res.cusId);
-            return res.status(200).send('Complete');
+            console.log(tmpId[0].cusNo);
+            return res.status(200).send(tmpId[0].cusNo);
         }
 
     } catch(err) {
