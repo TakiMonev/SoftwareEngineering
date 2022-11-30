@@ -40,6 +40,7 @@ const server = async() => {
         app.use('/employ', employRouter);
         app.use('/items', partRouter);
         app.use('/itemList', partListRouter);
+        
         //app.use('/customer', custRouter);
        
         // 받는 곳
