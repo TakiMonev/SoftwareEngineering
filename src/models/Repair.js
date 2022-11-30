@@ -1,13 +1,12 @@
 const { Schema, model, Types} = require('mongoose')
 
 const RepairSchema = new Schema({
-    repNo: { type: String, required: true },
-    serialNo: { type: String },
-    repDate: { type: String },
-    repReason: { type: String },
-    repFrom: { type : String },
-    repTo: { type : String },
-    repPrice: {type : Int } 
+    repNo: { type: Number, required: true },
+    cusNo: { type: String },
+    cusName: { type: String },
+    pNo: { type: String },
+    pName: {type: String },
+    repPrice: {type : Number } 
     }, 
     { timestamps: true }
 );

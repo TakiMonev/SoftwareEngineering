@@ -23,14 +23,25 @@ repairRouter.get('/', async(req, res) => {
     }
 });
 
+const RepairSchema = new Schema({
+    repNo: { type: Number, required: true },
+    cusNo: { type: String },
+    cusName: { type: String },
+    pNo: { type: String },
+    pName: {type: String },
+    repPrice: {type : Number } 
+    }, 
+    { timestamps: true }
+);
+
 repairRouter.post('/post', async(req, res) => {
     try {
         console.log("posting information");
         console.log(req.body);
 
-        let { pNo, pName, pPrice } = req.body;
+        let { repNo, cusNo, cusName, pNo, pName, repPrice } = req.body;
 
-        if (!pNo || !pName || !pPrice)
+        if (!repNo || !cusNo || !cusName || !pNo || !pName || !repPrice)
             return res.status(400).send({ err: "All informations are required" });
 
         // 데이터베이스에 저장

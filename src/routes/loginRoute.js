@@ -87,7 +87,7 @@ loginRouter.post('/find', async (req, res) => {
 
         if (!foundCust) {
             window.alert("Cannot find" + foundCust);
-            res.send(path.join(__dirname, '../../sw-engineering/src/pages/auth-page/LoginPage'))
+            res.status(200).send({cusNo: CusNo});
         }
 
     } catch(err) {

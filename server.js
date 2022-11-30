@@ -8,6 +8,7 @@ const http = require('http');
 const fs = require('fs'); 
 const path = require('path');
 const multer = require('multer');
+var cookieParser = require('cookie-parser');
 const { loginRouter } = require('./src/routes/loginRoute');
 const { employRouter } = require('./src/routes/employRoute');
 const { partRouter } = require('./src/routes/partRoute');
@@ -40,6 +41,7 @@ const server = async() => {
         app.use('/employ', employRouter);
         app.use('/items', partRouter);
         app.use('/itemList', partListRouter);
+        app.use(cookieParser());
         //app.use('/customer', custRouter);
        
         // 받는 곳
