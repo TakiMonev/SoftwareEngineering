@@ -1,10 +1,10 @@
 const { Schema, model, Types} = require('mongoose')
 
 const PartListSchema = new Schema({
-    plNo: { type: String, required: true },
-    pNo: { type: String },
+    plNo: { type: Number, required: true },
+    pNo: { type: Number },
     pName: { type: String },
-    cNo: { type: String },
+    cNo: { type: Number },
     CName: {type: String }
     }, 
     { timestamps: true }

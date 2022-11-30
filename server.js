@@ -41,15 +41,6 @@ const server = async() => {
         app.use('/items', partRouter);
         app.use('/itemList', partListRouter);
         //app.use('/customer', custRouter);
-        
-        /*
-        app.use('/user', userRouter);
-        app.use('/blog', blogRouter);
-        app.use('/users', usersRouter);
-        app.use('/facility', facilityRouter);
-        app.use('/review', reviewRouter);
-        app.use('/themes', themesRouter);
-        */
        
         // 받는 곳
         app.listen(PORT, async () =>  console.log(`server listening on port ${PORT}`))

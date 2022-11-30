@@ -1,7 +1,6 @@
 const { Router } = require('express');
 const mongoose = require("mongoose");
-const { Empl } = require('../models/Employ');
-const { Employ } = require('../classes/emplClass')
+const { Pali } = require('../models/PartList');
 
 const http = require('http');
 const fs = require('fs'); 
@@ -18,21 +17,26 @@ partListRouter.use(express.urlencoded({extended:false}));
 
 partListRouter.use(express.static(__dirname));
 
+partListRouter.get('/', async(req, res) => {
+    const partFound = await Pali.find({});
+    console.log("partFound : " + partFound);
+});
+
 partListRouter.post('/post', async(req, res) => {
     try {
         console.log("posting information");
         console.log(req.body);
 
-        let { worNo, worId, worPwd, worName, worTel, worPosition } = req.body;
+        let { plNo, pNo, pName, cNo, cName } = req.body;
 
-        if (!worNo || !worId || !worPwd || !worName || !worTel || !worPosition)
+        if (!plNo || !pNo || !pName || !cNo || !cName)
             return res.status(400).send({ err: "All informations are required" });
 
         // 데이터베이스에 저장
-        const worker = new Empl(req.body);
-        await worker.save();
+        const PartList = new Pali(req.body);
+        await PartList.save();
         
-        return res.send({ worker });
+        return res.send({ PartList });
           
     } catch(err) {
         console.log(err);
