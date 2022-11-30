@@ -33,4 +33,4 @@ class Employ
     }
 }
 
-module.exports = { Customer };
+module.exports = { Employ };

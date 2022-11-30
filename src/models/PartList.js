@@ -4,8 +4,8 @@ const PartListSchema = new Schema({
     plNo: { type: String, required: true },
     pNo: { type: String },
     pName: { type: String },
-    pMaker: { type: String },
-    pPrice: { type : Int }
+    cNo: { type: String },
+    CName: {type: String }
     }, 
     { timestamps: true }
 );

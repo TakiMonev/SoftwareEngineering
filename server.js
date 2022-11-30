@@ -9,6 +9,9 @@ const fs = require('fs');
 const path = require('path');
 const multer = require('multer');
 const { loginRouter } = require('./src/routes/loginRoute');
+const { employRouter } = require('./src/routes/employRoute');
+const { partRouter } = require('./src/routes/partRoute');
+const { partListRouter } = require('./src/routes/partListRoute');
 
 app.set('view engine', 'ejs');
 
@@ -34,7 +37,9 @@ const server = async() => {
         app.use(express.json());
         app.use('/', loginRouter);
         app.use('/main', mainRouter);
-
+        app.use('/main/employ', employRouter);
+        app.use('/main/part', partRouter);
+        app.use('/main/partList', partListRouter);
         //app.use('/customer', custRouter);
         
         /*

@@ -1,7 +1,7 @@
 const { Router } = require('express');
 const mongoose = require("mongoose");
 const { Cust } = require('../models/Customer');
-const { Customer } = require('../classes/custClass')
+const { Customer } = require('../classes/custClass');
 
 const http = require('http');
 const fs = require('fs'); 
@@ -12,6 +12,9 @@ const loginRouter = express.Router();
 
 const ejs = require('ejs');
 var cors = require('cors');
+const { isEmptyObject } = require('document/lib/lang');
+const { default: axios } = require('axios');
+
 loginRouter.use(cors());
 
 loginRouter.use(express.json())
@@ -29,13 +32,11 @@ loginRouter.get('/', async (req, res) => {
     }
 });
 
-
-
-loginRouter.post('/login', async(req, res) => {
+loginRouter.post('/signup', async(req, res) => {
     try {
         console.log("posting information");
         console.log(req.body);
-
+        
         let { cusNo, cusId, cusPwd, cusName, cusTel } = req.body;
 
         if (!cusNo || !cusId || !cusPwd || !cusName || !cusTel)
@@ -44,11 +45,33 @@ loginRouter.post('/login', async(req, res) => {
         // 데이터베이스에 저장
         const customer = new Cust(req.body);
         const cusInfo = new Customer();
-        cusInfo.Insert(cusNo, cusId, cusPwd, cusName, cusTel);
-        //await customer.save();
+        //cusInfo.Insert(cusNo, cusId, cusPwd, cusName, cusTel);
+        await customer.save();
         
         return res.send({ customer });
           
+    } catch(err) {
+        console.log(err);
+        return res.status(500).send({ err: err.message });
+    }
+});
+
+loginRouter.post('/login', async(req, res) => {
+    try {
+        //console.log("posting information");
+        //console.log(req.body);
+
+        const tmpId = await Cust.find({ cusId : req.body.cusId });
+        console.log(isEmptyObject(tmpId));
+        
+        if (isEmptyObject(tmpId))
+            console.log("로그인 실패. 아이디 / 비번 확인");
+
+        else
+        {
+            return res.status(200).send('Complete');
+        }
+
     } catch(err) {
         console.log(err);
         return res.status(500).send({ err: err.message });
@@ -59,7 +82,8 @@ loginRouter.post('/find', async (req, res) => {
     try {
         let { CusNo } = req.body;
 
-        const foundCust = Cust.findOne({ cusNo: CusNo })
+        const foundCust = Cust.findOne({ cusNo: CusNo });
+        console.log(foundCust);
 
         if (!foundCust) {
             window.alert("Cannot find" + foundCust);

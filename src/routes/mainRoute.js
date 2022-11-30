@@ -55,7 +55,7 @@ mainRouter.post('/main', async(req, res) => {
     try {
         console.log("posting information");
         console.log(req.body);
-
+        
         let { cusNo, cusName, cusTel, cusAddr } = req.body;
 
         if (!cusNo || !cusName || !cusTel || !cusAddr)
@@ -109,6 +109,34 @@ mainRouter.post('/main/update', async(req, res) => {
     }
 });
 
+
+/*
+
+loginRouter.post('/login', async(req, res) => {
+    try {
+        console.log("posting information");
+        console.log(req.body);
+
+        let { cusId, cusPwd } = req.body;
+
+        if (!cusId || !cusPwd)
+            return res.status(400).send({ err: "All informations are required" });
+
+        // 데이터베이스에 저장
+        const customer = new Cust(req.body);
+        const cusInfo = new Customer();
+        cusInfo.Insert(cusNo, cusId, cusPwd, cusName, cusTel);
+        //await customer.save();
+        
+        return res.send({ customer });
+          
+    } catch(err) {
+        console.log(err);
+        return res.status(500).send({ err: err.message });
+    }
+});
+
+*/
 module.exports = {
     mainRouter
 }

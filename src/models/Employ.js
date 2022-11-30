@@ -1,10 +1,11 @@
 const { Schema, model, Types} = require('mongoose')
 
 const EmploySchema = new Schema({
-    worNo: { type: String, required: true },
+    worNo: { type: Number, required: true },
+    worId: { type: String },
+    worPwd: { type: String },
     worName: { type: String },
     worTel: { type: String },
-    worAddr: { type : String },
     worPosition: { type : String }
     }, 
     { timestamps: true }
